@@ -27,5 +27,5 @@
             android:label="@string/fault_repair" >
         </activity>
     </application>
-<!-- return to English again -->
+<!-- del qinliang by test -->
 </manifest>
