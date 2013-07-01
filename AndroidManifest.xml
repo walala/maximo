@@ -27,5 +27,5 @@
             android:label="@string/fault_repair" >
         </activity>
     </application>
-<!-- return to English -->
+<!-- return to English again -->
 </manifest>
