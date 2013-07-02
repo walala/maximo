@@ -53,6 +53,39 @@ public class RepairActivity extends Activity {
         map.put("title", "G3");
         map.put("info", "google 3");
         map.put("img", R.drawable.ic_launcher);
+        
+        map.put("title", "G4");
+        map.put("info", "google 4");
+        map.put("img", R.drawable.ic_launcher);
+        list.add(map);
+ 
+        map = new HashMap<String, Object>();
+        map.put("title", "G5");
+        map.put("info", "google 5");
+        map.put("img", R.drawable.ic_launcher);
+        list.add(map);
+ 
+        map = new HashMap<String, Object>();
+        map.put("title", "G6");
+        map.put("info", "google 6");
+        map.put("img", R.drawable.ic_launcher);
+        list.add(map);
+        
+        map.put("title", "G7");
+        map.put("info", "google 7");
+        map.put("img", R.drawable.ic_launcher);
+        list.add(map);
+ 
+        map = new HashMap<String, Object>();
+        map.put("title", "G8");
+        map.put("info", "google 8");
+        map.put("img", R.drawable.ic_launcher);
+        list.add(map);
+ 
+        map = new HashMap<String, Object>();
+        map.put("title", "G9");
+        map.put("info", "google 9");
+        map.put("img", R.drawable.ic_launcher);
         list.add(map);
          
         return list;
