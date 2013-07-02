@@ -104,6 +104,7 @@
 
         </LinearLayout>
 		<ListView
+		    android:id="@+id/repairList"
 		    android:layout_width="match_parent"
 		    android:layout_height="fill_parent"
 		    android:layout_weight="1" >
