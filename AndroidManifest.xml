@@ -27,5 +27,4 @@
             android:label="@string/fault_repair" >
         </activity>
     </application>
-
 </manifest>
