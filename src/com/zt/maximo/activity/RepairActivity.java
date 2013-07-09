@@ -1,19 +1,16 @@
 package com.zt.maximo.activity;
 
 import com.zt.maximo.R;
-import com.zt.maximo.R.layout;
-import com.zt.maximo.R.menu;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
-public class RepairActivity extends Activity {
+public class RepairActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_repair);
+//		setContentView(R.layout.activity_repair);
 	}
 
 	@Override
