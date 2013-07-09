@@ -8,17 +8,21 @@ import android.os.Message;
 public class LoadRepairListRunnable implements Runnable {
 	
 	private Handler handler;
-	private Context context;
 	
-	public LoadRepairListRunnable(Handler handler, Context context){
+	public LoadRepairListRunnable(Handler handler){
 		this.handler = handler;
-		this.context = context;
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		//do something...
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Message msg = new Message();
 		msg.what = 0;
 		Bundle bundle = new Bundle();
