@@ -6,7 +6,7 @@ import android.content.Context;
 
 import com.zt.maximo.service.domain.UserDo;
 
-public class UserDao extends TxBaseDao {
+public class UserDao extends BaseDao {
 	
 	public UserDao(Context context) {
 		super(context);
