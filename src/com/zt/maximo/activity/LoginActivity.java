@@ -10,6 +10,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -222,7 +223,7 @@ public class LoginActivity extends Activity {
 			}
 
 			// TODO: register the new account here.
-			return true;
+			return false;
 		}
 
 		@Override
@@ -231,7 +232,9 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-				finish();
+				Intent intent = new Intent();
+				intent.setClass(LoginActivity.this, MainActivity.class);
+				startActivity(intent);
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));

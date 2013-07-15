@@ -14,8 +14,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.zt.maximo.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.zt.maximo.activity.LoginActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,13 +24,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.zt.maximo.activity.RepairActivity"
-            android:label="@string/fault_repair" >
+            android:name="com.zt.maximo.activity.MainActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.zt.maximo.activity.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:name="com.zt.maximo.activity.RepairActivity"
+            android:label="@string/fault_repair" >
         </activity>
     </application>
 
