@@ -26,5 +26,11 @@
             android:name="com.zt.maximo.activity.RepairActivity"
             android:label="@string/fault_repair" >
         </activity>
+        <activity
+            android:name="com.zt.maximo.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
     </application>
+
 </manifest>
