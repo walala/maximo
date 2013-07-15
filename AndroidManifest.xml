@@ -27,7 +27,7 @@
             android:label="@string/fault_repair" >
         </activity>
         <activity
-            android:name="com.zt.maximo.LoginActivity"
+            android:name="com.zt.maximo.activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>

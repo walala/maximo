@@ -1,4 +1,10 @@
-package com.zt.maximo;
+package com.zt.maximo.activity;
+
+import com.zt.maximo.R;
+import com.zt.maximo.R.id;
+import com.zt.maximo.R.layout;
+import com.zt.maximo.R.menu;
+import com.zt.maximo.R.string;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
