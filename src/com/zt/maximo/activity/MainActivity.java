@@ -4,6 +4,7 @@ import com.zt.maximo.R;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +16,10 @@ public class MainActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		String nick = getIntent().getStringExtra("nick");
+		Log.i("nick",nick);
+		setTitle(getTitle() + " -- " + nick);
 		
 		//注册按钮监听事件
 		onClickListenter();

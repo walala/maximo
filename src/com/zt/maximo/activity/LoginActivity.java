@@ -1,20 +1,15 @@
 package com.zt.maximo.activity;
 
-import com.zt.maximo.R;
-import com.zt.maximo.R.id;
-import com.zt.maximo.R.layout;
-import com.zt.maximo.R.menu;
-import com.zt.maximo.R.string;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -22,11 +17,23 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.zt.maximo.R;
+import com.zt.maximo.dao.BaseDao;
+import com.zt.maximo.dao.UserDao;
+import com.zt.maximo.service.UserService;
+import com.zt.maximo.service.domain.AppProxyConfig;
+import com.zt.maximo.service.domain.AppProxyResultDo;
+import com.zt.maximo.service.domain.ProxyUserInfoDo;
+import com.zt.maximo.util.DialogUtil;
+import com.zt.maximo.util.JsonUtil;
+import com.zt.maximo.util.PropertiesUtil;
+import com.zt.maximo.util.PropertiesUtil.SpKey;
+
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 	/**
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
@@ -45,15 +52,22 @@ public class LoginActivity extends Activity {
 	private UserLoginTask mAuthTask = null;
 
 	// Values for email and password at the time of the login attempt.
-	private String mEmail;
+	private String mAccount;
 	private String mPassword;
 
 	// UI references.
-	private EditText mEmailView;
+	private EditText mAccountView;
 	private EditText mPasswordView;
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+	
+	//dao
+	private UserDao userDao = null;
+	// properties
+	private PropertiesUtil prop;
+	// dialog
+	private Dialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +76,9 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 
 		// Set up the login form.
-		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
-		mEmailView = (EditText) findViewById(R.id.email);
-		mEmailView.setText(mEmail);
+		mAccount = getIntent().getStringExtra(EXTRA_EMAIL);
+		mAccountView = (EditText) findViewById(R.id.account);
+		mAccountView.setText(mAccount);
 
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView
@@ -91,6 +105,11 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+		
+		//dao innit
+		userDao = new UserDao(this);
+		
+		prop = new PropertiesUtil(this);
 	}
 
 	@Override
@@ -111,11 +130,11 @@ public class LoginActivity extends Activity {
 		}
 
 		// Reset errors.
-		mEmailView.setError(null);
+		mAccountView.setError(null);
 		mPasswordView.setError(null);
 
 		// Store values at the time of the login attempt.
-		mEmail = mEmailView.getText().toString();
+		mAccount = mAccountView.getText().toString();
 		mPassword = mPasswordView.getText().toString();
 
 		boolean cancel = false;
@@ -133,13 +152,13 @@ public class LoginActivity extends Activity {
 		}
 
 		// Check for a valid email address.
-		if (TextUtils.isEmpty(mEmail)) {
-			mEmailView.setError(getString(R.string.error_field_required));
-			focusView = mEmailView;
+		if (TextUtils.isEmpty(mAccount)) {
+			mAccountView.setError(getString(R.string.error_field_required));
+			focusView = mAccountView;
 			cancel = true;
-		} else if (!mEmail.contains("@")) {
-			mEmailView.setError(getString(R.string.error_invalid_email));
-			focusView = mEmailView;
+		} else if (!mAccount.contains("@")) {
+			mAccountView.setError(getString(R.string.error_invalid_account));
+			focusView = mAccountView;
 			cancel = true;
 		}
 
@@ -155,6 +174,24 @@ public class LoginActivity extends Activity {
 			mAuthTask = new UserLoginTask();
 			mAuthTask.execute((Void) null);
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Log.i("LoginActivity", "onResume...");
+		if(prop.getBoolean(SpKey.isFirst, true)){
+			new BaseDao(this).init();
+			prop.setBoolean(SpKey.isFirst, false);
+		}else{
+			Log.i("LoginActivity", "not init base data");
+		}
+	}
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
 	}
 
 	/**
@@ -202,43 +239,62 @@ public class LoginActivity extends Activity {
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
-	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+	public class UserLoginTask extends AsyncTask<Void, Void, AppProxyResultDo> {
 		@Override
-		protected Boolean doInBackground(Void... params) {
+		protected AppProxyResultDo doInBackground(Void... params) {
 			// TODO: attempt authentication against a network service.
 
 			try {
 				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
+				Log.d("loginTask","currentThread:"+Thread.currentThread().getName());
+				AppProxyResultDo aprd = UserService.getInstance().login(mAccount, mPassword);
+				
+				//-----模拟AppProxyResultDo数据------
+				aprd.setError(false);
+				aprd.setErrorMessage(null);
+				
+				ProxyUserInfoDo puiDo = new ProxyUserInfoDo();
+				puiDo.setRequestCode(AppProxyConfig.USER_LOGIN_SUCCESS);
+				puiDo.setNick("张三");
+				puiDo.setUid(111111);
+				aprd.setResut(puiDo);
+				//-----模拟AppProxyResultDo数据------
+				
+				return aprd;
+			} catch (Exception e) {
+				return null;
 			}
 
-			for (String credential : DUMMY_CREDENTIALS) {
+/*			for (String credential : DUMMY_CREDENTIALS) {
 				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
+				if (pieces[0].equals(mAccount)) {
 					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
+					return new AppProxyResultDo();
 				}
-			}
-
-			// TODO: register the new account here.
-			return false;
+			}*/
 		}
 
 		@Override
-		protected void onPostExecute(final Boolean success) {
+		protected void onPostExecute(final AppProxyResultDo result) {
 			mAuthTask = null;
 			showProgress(false);
 
-			if (success) {
+			Log.i("loginResult", JsonUtil.Object2Json(result));
+			
+			if (result.isError()) {
+//				mPasswordView.setError(getString(R.string.error_incorrect_password));
+//				mPasswordView.requestFocus();
+				
+				dismissDialog();
+				DialogUtil.newAlertDialog(LoginActivity.this, "亲~", "网络异常,请稍后再试喔").show();
+				
+			} else {
 				Intent intent = new Intent();
+				Bundle bundle = new Bundle();
+				bundle.putString("nick", "张三");
+				intent.putExtras(bundle);
 				intent.setClass(LoginActivity.this, MainActivity.class);
 				startActivity(intent);
-			} else {
-				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
-				mPasswordView.requestFocus();
 			}
 		}
 
@@ -246,6 +302,13 @@ public class LoginActivity extends Activity {
 		protected void onCancelled() {
 			mAuthTask = null;
 			showProgress(false);
+		}
+	}
+	
+	public void dismissDialog() {
+		if (null!=dialog) {
+			dialog.dismiss();
+			dialog = null;
 		}
 	}
 }

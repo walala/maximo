@@ -1,4 +1,4 @@
-package com.zt.maximo.service.domain;
+package com.zt.maximo.dao.domain;
 
 import java.io.Serializable;
 

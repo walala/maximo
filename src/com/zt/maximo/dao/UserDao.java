@@ -4,7 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 
-import com.zt.maximo.service.domain.UserDo;
+import com.zt.maximo.dao.domain.UserDo;
 
 public class UserDao extends BaseDao {
 	

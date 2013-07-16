@@ -6,8 +6,8 @@ import java.util.Map;
 
 import com.zt.maximo.F;
 import com.zt.maximo.dao.UserDao;
+import com.zt.maximo.dao.domain.UserDo;
 import com.zt.maximo.service.domain.AppProxyResultDo;
-import com.zt.maximo.service.domain.UserDo;
 
 public class UserService extends BaseService {
 
@@ -23,13 +23,10 @@ public class UserService extends BaseService {
 	private UserService() {
 	}
 
-	public AppProxyResultDo login(String account, String password, String code,
-			String key) {
+	public AppProxyResultDo login(String account, String password) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("account", account);
 		map.put("password", password);
-		map.put("code", code);
-		map.put("key", key);
 		return this.execute(login, map);
 	}
 

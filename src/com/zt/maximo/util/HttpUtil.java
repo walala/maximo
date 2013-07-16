@@ -49,7 +49,7 @@ public class HttpUtil {
 	private static HttpClient simpleHttpClient = null;
 	
 	private final static String DEFAULT_CHARSET = HTTP.UTF_8;
-	private final static int CONNECT_TIME_OUT = 25*1000;
+	private final static int CONNECT_TIME_OUT = 5*1000;
 	private final static int READ_TIME_OUT = 40*1000;
 	
 	private static void init(){
