@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.util.Log;
+
 import com.zt.maximo.F;
 import com.zt.maximo.dao.UserDao;
 import com.zt.maximo.dao.domain.UserDo;

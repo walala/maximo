@@ -20,7 +20,7 @@ public class BaseService {
 	 * 用户
 	 */
 	//登录
-	protected static final String login = "/user/login";
+	protected static final String login = "/zt/rest/user/login";
 	
 	//退出登录
 	protected static final String logout = "/user/logout";

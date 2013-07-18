@@ -250,14 +250,14 @@ public class LoginActivity extends BaseActivity {
 				AppProxyResultDo aprd = UserService.getInstance().login(mAccount, mPassword);
 				
 				//-----模拟AppProxyResultDo数据------
-				aprd.setError(false);
+/*				aprd.setError(false);
 				aprd.setErrorMessage(null);
 				
 				ProxyUserInfoDo puiDo = new ProxyUserInfoDo();
 				puiDo.setRequestCode(AppProxyConfig.USER_LOGIN_SUCCESS);
 				puiDo.setNick("张三");
 				puiDo.setUid(111111);
-				aprd.setResut(puiDo);
+				aprd.setResut(puiDo);*/
 				//-----模拟AppProxyResultDo数据------
 				
 				return aprd;
