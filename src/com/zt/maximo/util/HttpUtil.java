@@ -19,6 +19,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -27,6 +28,7 @@ import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
@@ -46,7 +48,7 @@ import android.util.Log;
 
 public class HttpUtil {
 	
-	private static HttpClient simpleHttpClient = null;
+	private static DefaultHttpClient simpleHttpClient = null;
 	
 	private final static String DEFAULT_CHARSET = HTTP.UTF_8;
 	private final static int CONNECT_TIME_OUT = 5*1000;
@@ -89,6 +91,15 @@ public class HttpUtil {
 		}
 		try {
 			HttpResponse response = simpleHttpClient.execute(postMethod);
+			CookieStore cookie = simpleHttpClient.getCookieStore();
+			List<Cookie> cookies = cookie.getCookies();
+            if (cookies.isEmpty()) {
+                Log.i("cookies", "empty");
+            } else {
+                for (int i = 0; i < cookies.size(); i++) {
+                    Log.i("cookie"+i, cookies.get(i).toString());
+                }
+            }
 			if (response.getStatusLine().getStatusCode()!=HttpStatus.SC_OK) {
 				return null;
 			}

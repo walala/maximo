@@ -61,6 +61,24 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <CheckBox
+                    android:id="@+id/remember_password_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checkbox_remember_password" />
+
+                <CheckBox
+                    android:id="@+id/auto_login_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checkbox_auto_login" />
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/sign_in_button"
                 android:layout_width="wrap_content"
