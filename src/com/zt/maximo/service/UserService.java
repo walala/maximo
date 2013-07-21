@@ -103,13 +103,17 @@ public class UserService extends BaseService {
 		UserDo tmp = userDao.getUserByUid(user.getUid());
 		if (null == tmp) {
 			// 插入数据库
-			userDao.addUser(user);
+			Log.d("add user", "" + userDao.addUser(user));
 			return user;
 		} else {
 			// 更新用户数据
 			userDao.updateUser(user);
 			return userDao.getUserByUid(user.getUid());
 		}
+	}
+	
+	public UserDo getUserInfo(UserDao userDao){
+		return userDao.getAutoLoginUser();
 	}
 
 }

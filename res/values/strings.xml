@@ -8,5 +8,6 @@
     <string name="to_do">代办任务</string>
     <string name="button_filter">筛选</string>
     <string name="button_search">搜索</string>
+    <string name="title_activity_start">欢迎使用Maximo</string>
 
 </resources>

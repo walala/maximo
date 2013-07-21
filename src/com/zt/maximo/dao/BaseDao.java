@@ -27,7 +27,7 @@ public class BaseDao {
 		
 		//用户表
 		String sqlUser = "CREATE TABLE if not exists  mixUser (_id INTEGER PRIMARY KEY autoincrement,uid INTEGER,account TEXT," +
-				"password TEXT,defsite TEXT,status INTEGER,autoLogin TEXT,savePassword TEXT," +
+				"password TEXT,nick TEXT,sex TEXT,defsite TEXT,status INTEGER,autoLogin TEXT,savePassword TEXT," +
 				"lastLogin INTEGER,lastUpdate TEXT,imei TEXT);";
 		
 		//聊天记录

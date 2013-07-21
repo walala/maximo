@@ -7,7 +7,7 @@ import com.zt.maximo.orm.annotation.Table;
 import com.zt.maximo.orm.annotation.Transient;
 
 
-@Table("txUser")
+@Table("mixUser")
 public class UserDo implements Serializable {
 
 	/**
@@ -43,6 +43,14 @@ public class UserDo implements Serializable {
 	 */
 	Boolean savePassword;
 	/**
+	 * 所在区域
+	 */
+	String defsite;
+	/**
+	 * 状态
+	 */
+	Integer status;
+	/**
 	 * 昵称
 	 */
 	String nick;
@@ -54,6 +62,10 @@ public class UserDo implements Serializable {
 	 * 最后手工登录时间
 	 */
 	Long lastLogin;
+	/**
+	 * 最后更新时间
+	 */
+	Long lastUpdate;
 	/**
 	 * 设备号
 	 */
@@ -113,6 +125,30 @@ public class UserDo implements Serializable {
 
 	public void setSavePassword(Boolean savePassword) {
 		this.savePassword = savePassword;
+	}
+
+	public String getDefsite() {
+		return defsite;
+	}
+
+	public void setDefsite(String defsite) {
+		this.defsite = defsite;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Long getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(Long lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 
 	public String getNick() {

@@ -1,5 +1,8 @@
 package com.zt.maximo.activity.runnable;
 
+import com.zt.maximo.service.RepairService;
+import com.zt.maximo.service.domain.AppProxyResultDo;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +10,7 @@ import android.os.Message;
 
 public class LoadRepairListRunnable implements Runnable {
 	
+	public static final String LOAD_REPAIR_LIST = "loadRepairList";
 	private Handler handler;
 	
 	public LoadRepairListRunnable(Handler handler){
@@ -16,18 +20,12 @@ public class LoadRepairListRunnable implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		//do something...
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//获取工单列表结果集
+		AppProxyResultDo aprd = RepairService.getInstance().uploadRepairList();
 		Message msg = new Message();
 		msg.what = 0;
 		Bundle bundle = new Bundle();
-		bundle.putSerializable("aaa", "1111");
-		bundle.putSerializable("bbb", "2222");
+		bundle.putSerializable(LOAD_REPAIR_LIST, aprd);
 		msg.setData(bundle);
 		handler.sendMessage(msg);
 		

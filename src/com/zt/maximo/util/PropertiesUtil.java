@@ -69,6 +69,7 @@ public class PropertiesUtil {
 		uid("uid"),
 		imei("imei"),
 		autoLogin("autoLogin"),
+		savePassword("savePassword"),
 		account("account"),
 		password("password"),
 		nick("nick"),

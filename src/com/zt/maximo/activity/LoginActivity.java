@@ -266,6 +266,13 @@ public class LoginActivity extends BaseActivity implements OnClickListener,OnEdi
 					user.setUid(result.getUid());
 					user.setLastLogin(System.currentTimeMillis());
 					UserService.getInstance().saveOrUpdateUser(user, userDao);
+					
+					prop.setString(SpKey.account, mAccount);
+					prop.setString(SpKey.password, mPassword);
+					prop.setString(SpKey.nick, result.getNick());
+					prop.setInt(SpKey.uid, result.getUid());
+					prop.setBoolean(SpKey.savePassword, isSavePassword);
+					prop.setBoolean(SpKey.autoLogin, isAutoLogin);
 					//将本地最新用户数据缓存到cache中，供全局使用
 					F.user = user;
 					

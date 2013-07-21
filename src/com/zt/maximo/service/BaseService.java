@@ -41,6 +41,12 @@ public class BaseService {
 	protected static final String updateUserIcon = "/user/updateIcon";
 	//修改用户个性介绍
 	protected static final String updateUserSummary = "/user/modifySummary";
+	
+	/**
+	 * 工单
+	 */
+	//获取维修工单列表
+	protected static final String uploadRepairList = "/zt/rest/user/repairList";
 
 	
 	protected AppProxyResultDo execute(String method,Map<String, String> args) {
